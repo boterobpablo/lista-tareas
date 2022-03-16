@@ -97,6 +97,7 @@ btnBorrar.addEventListener('click', () => {
 });
 
 
+// evento para filtrar la lista
 ulFiltros.addEventListener('click', (event) => {
 
     const filtro = event.target.text;
