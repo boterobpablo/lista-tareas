@@ -1,12 +1,14 @@
 import { Todo } from '../classes';
 import { todoList } from '../index';
 
+
 // Referencias en el HTML
 const divTodoList   = document.querySelector('.todo-list');
 const txtInput      = document.querySelector('.new-todo');
 const btnBorrar     = document.querySelector('.clear-completed');
 const ulFiltros     = document.querySelector('.filters');
 const anchorFiltros = document.querySelectorAll('.filtro');
+
 
 // crear la insercion de la tarea en el html
 export const crearTodoHtml = ( todo ) => {
@@ -29,7 +31,6 @@ export const crearTodoHtml = ( todo ) => {
     divTodoList.append( div.firstElementChild );
 
     return div.firstElementChild;
-
 }
 
 
@@ -49,8 +50,8 @@ txtInput.addEventListener('keyup', ( event ) => {
         crearTodoHtml( nuevoTodo );
         txtInput.value = '';
     }
-
 });
+
 
 // marcar como completado o eliminar todo
 // click, cuando se hace click en el elemento
@@ -76,10 +77,9 @@ divTodoList.addEventListener('click', (event) => {
 
         todoList.eliminarTodo( todoId );
         divTodoList.removeChild( todoElemento );
-
     }
-
 });
+
 
 // evento de eliminar completados
 btnBorrar.addEventListener('click', () => {
@@ -93,9 +93,7 @@ btnBorrar.addEventListener('click', () => {
         if( elemento.classList.contains('completed') ){
             divTodoList.removeChild(elemento);
         }
-
     }
-
 });
 
 
@@ -125,9 +123,6 @@ ulFiltros.addEventListener('click', (event) => {
                     elemento.classList.add('hidden');
                 }
             break;
-
         }
-
     }
-
 });
