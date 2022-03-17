@@ -59,7 +59,7 @@ const eventoEnter = (i) => {
     }
 })};
 eventoEnter(0);
-// eventoEnter(1);
+eventoEnter(1);
 
 
 // marcar como completado o eliminar todo
@@ -90,13 +90,13 @@ const eventoMarcarCompletado = (i) => {
 
         i == 0 
             ? todoListPri.eliminarTodo( todoId )
-            : todoListPri.eliminarTodo( todoId );
+            : todoListCom.eliminarTodo( todoId );
 
         divTodoList[i].removeChild( todoElemento );
     }
 })};
 eventoMarcarCompletado(0);
-// eventoMarcarCompletado(1);
+eventoMarcarCompletado(1);
 
 
 // evento de eliminar completados
@@ -117,7 +117,7 @@ const eventoBorrar = (j) => {
     }
 })};
 eventoBorrar(0);
-// eventoBorrar(1);
+eventoBorrar(1);
 
 
 // evento para filtrar la lista
@@ -152,4 +152,4 @@ const eventoFiltrar = (i) => {
     }
 })};
 eventoFiltrar(0);
-// eventoFiltrar(1);
+eventoFiltrar(1);
