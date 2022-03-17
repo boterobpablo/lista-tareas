@@ -13,6 +13,6 @@ export const todoList = new TodoList();
 // es lo mismo que hacer:
 // si solo se tiene un argumento y ese mismo se pasa como argumento
 // del callback, se puede acortar de la siguiente manera
-todoList.todos.forEach( crearTodoHtml );
+todoList.todos.forEach( todo => crearTodoHtml(todo, 0) );
 
 console.log( 'todos', todoList.todos );

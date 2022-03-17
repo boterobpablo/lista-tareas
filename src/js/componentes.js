@@ -3,15 +3,17 @@ import { todoList } from '../index';
 
 
 // Referencias en el HTML
-const divTodoList   = document.querySelector('.todo-list');
-const txtInput      = document.querySelector('.new-todo');
-const btnBorrar     = document.querySelector('.clear-completed');
-const ulFiltros     = document.querySelector('.filters');
+const divTodoList   = document.querySelectorAll('.todo-list');
+const txtInput      = document.querySelectorAll('.new-todo');
+const btnBorrar     = document.querySelectorAll('.clear-completed');
+const ulFiltros     = document.querySelectorAll('.filters');
 const anchorFiltros = document.querySelectorAll('.filtro');
 
+console.log(ulFiltros);
+console.log(anchorFiltros);
 
 // crear la insercion de la tarea en el html
-export const crearTodoHtml = ( todo ) => {
+export const crearTodoHtml = ( todo, indice ) => {
 
     const htmlTodo = `
     <li class="${  (todo.completado) ? 'completed' : '' }" data-id="${ todo.id }">
@@ -28,7 +30,7 @@ export const crearTodoHtml = ( todo ) => {
     
     // para insertar solo el primer hijo, en este caso, la
     // etiqueta li, no incluiria el div
-    divTodoList.append( div.firstElementChild );
+    divTodoList[indice].append( div.firstElementChild );
 
     return div.firstElementChild;
 }
@@ -38,24 +40,27 @@ export const crearTodoHtml = ( todo ) => {
 
 // keyup, cuando la persona suelta la tecla
 // crear el nuevo todo a partir del input
-txtInput.addEventListener('keyup', ( event ) => {
+const eventoEnter = (i) => {
+    txtInput[i].addEventListener('keyup', ( event ) => {
 
     // si se presiona la tecla enter
-    if ( event.keyCode === 13 && txtInput.value.length > 0 ) {
+    if ( event.keyCode === 13 && txtInput[i].value.length > 0 ) {
 
-        console.log(txtInput.value);
-        const nuevoTodo = new Todo( txtInput.value );
+        console.log(txtInput[i].value);
+        const nuevoTodo = new Todo( txtInput[i].value );
         todoList.nuevoTodo( nuevoTodo );
 
-        crearTodoHtml( nuevoTodo );
-        txtInput.value = '';
+        crearTodoHtml( nuevoTodo, i );
+        txtInput[i].value = '';
     }
-});
+})};
+eventoEnter(0);
 
 
 // marcar como completado o eliminar todo
 // click, cuando se hace click en el elemento
-divTodoList.addEventListener('click', (event) => {
+const eventoMarcarCompletado = (i) => {
+    divTodoList[i].addEventListener('click', (event) => {
 
     // para saber a q parte del elmeento se le dio click
     // si al input, label o button
@@ -76,29 +81,33 @@ divTodoList.addEventListener('click', (event) => {
     } else if( nombreElemento.includes('button') ) { // hay que borrar el todo
 
         todoList.eliminarTodo( todoId );
-        divTodoList.removeChild( todoElemento );
+        divTodoList[i].removeChild( todoElemento );
     }
-});
+})};
+eventoMarcarCompletado(0);
 
 
 // evento de eliminar completados
-btnBorrar.addEventListener('click', () => {
+const eventoBorrar = (j) => {
+    btnBorrar[j].addEventListener('click', () => {
 
     todoList.eliminarCompletados();
 
-    for( let i = divTodoList.children.length-1; i >= 0; i-- ) {
+    for( let i = divTodoList[j].children.length-1; i >= 0; i-- ) {
 
-        const elemento = divTodoList.children[i];
+        const elemento = divTodoList[j].children[i];
 
         if( elemento.classList.contains('completed') ){
-            divTodoList.removeChild(elemento);
+            divTodoList[j].removeChild(elemento);
         }
     }
-});
+})};
+eventoBorrar(0);
 
 
 // evento para filtrar la lista
-ulFiltros.addEventListener('click', (event) => {
+const eventoFiltrar = (i) => {
+    ulFiltros[i].addEventListener('click', (event) => {
 
     const filtro = event.target.text;
     if( !filtro ){ return; }
@@ -106,7 +115,7 @@ ulFiltros.addEventListener('click', (event) => {
     anchorFiltros.forEach( elem => elem.classList.remove('selected') );
     event.target.classList.add('selected');
 
-    for( const elemento of divTodoList.children ) {
+    for( const elemento of divTodoList[i].children ) {
 
         elemento.classList.remove('hidden');
         const completado = elemento.classList.contains('completed');
@@ -126,4 +135,5 @@ ulFiltros.addEventListener('click', (event) => {
             break;
         }
     }
-});
+})};
+eventoFiltrar(0);
