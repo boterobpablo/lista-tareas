@@ -1,5 +1,5 @@
 import { Todo } from '../classes';
-import { todoListPri } from '../index';
+import { todoListPri, todoListCom } from '../index';
 
 
 // Referencias en el HTML
@@ -49,7 +49,10 @@ const eventoEnter = (i) => {
 
         console.log(txtInput[i].value);
         const nuevoTodo = new Todo( txtInput[i].value );
-        todoListPri.nuevoTodo( nuevoTodo );
+        
+        i == 0 
+            ? todoListPri.nuevoTodo( nuevoTodo )
+            : todoListCom.nuevoTodo( nuevoTodo );
 
         crearTodoHtml( nuevoTodo, i );
         txtInput[i].value = '';
@@ -75,14 +78,20 @@ const eventoMarcarCompletado = (i) => {
     const todoId         = todoElemento.getAttribute('data-id');
 
     if (  nombreElemento.includes('input') ){ // click en el check 
-        todoListPri.marcarCompletado( todoId );
+
+        i == 0
+            ? todoListPri.marcarCompletado( todoId )
+            : todoListCom.marcarCompletado( todoId );
 
         // quitar o poner una clase en el elemento
         todoElemento.classList.toggle('completed');
 
     } else if( nombreElemento.includes('button') ) { // hay que borrar el todo
 
-        todoListPri.eliminarTodo( todoId );
+        i == 0 
+            ? todoListPri.eliminarTodo( todoId )
+            : todoListPri.eliminarTodo( todoId );
+
         divTodoList[i].removeChild( todoElemento );
     }
 })};
@@ -94,7 +103,9 @@ eventoMarcarCompletado(0);
 const eventoBorrar = (j) => {
     btnBorrar[j].addEventListener('click', () => {
 
-    todoListPri.eliminarCompletados();
+    j == 0
+        ? todoListPri.eliminarCompletados()
+        : todoListCom.eliminarCompletados();
 
     for( let i = divTodoList[j].children.length-1; i >= 0; i-- ) {
 
