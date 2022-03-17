@@ -1,5 +1,5 @@
 import { Todo } from '../classes';
-import { todoList } from '../index';
+import { todoListPri } from '../index';
 
 
 // Referencias en el HTML
@@ -9,7 +9,6 @@ const btnBorrar     = document.querySelectorAll('.clear-completed');
 const ulFiltros     = document.querySelectorAll('.filters');
 const anchorFiltros = document.querySelectorAll('.filtro');
 
-console.log(ulFiltros);
 console.log(anchorFiltros);
 
 // crear la insercion de la tarea en el html
@@ -30,7 +29,9 @@ export const crearTodoHtml = ( todo, indice ) => {
     
     // para insertar solo el primer hijo, en este caso, la
     // etiqueta li, no incluiria el div
-    divTodoList[indice].append( div.firstElementChild );
+    indice == 0 
+        ? divTodoList[0].append( div.firstElementChild )
+        : divTodoList[1].append( div.firstElementChild );
 
     return div.firstElementChild;
 }
@@ -48,13 +49,14 @@ const eventoEnter = (i) => {
 
         console.log(txtInput[i].value);
         const nuevoTodo = new Todo( txtInput[i].value );
-        todoList.nuevoTodo( nuevoTodo );
+        todoListPri.nuevoTodo( nuevoTodo );
 
         crearTodoHtml( nuevoTodo, i );
         txtInput[i].value = '';
     }
 })};
 eventoEnter(0);
+// eventoEnter(1);
 
 
 // marcar como completado o eliminar todo
@@ -73,25 +75,26 @@ const eventoMarcarCompletado = (i) => {
     const todoId         = todoElemento.getAttribute('data-id');
 
     if (  nombreElemento.includes('input') ){ // click en el check 
-        todoList.marcarCompletado( todoId );
+        todoListPri.marcarCompletado( todoId );
 
         // quitar o poner una clase en el elemento
         todoElemento.classList.toggle('completed');
 
     } else if( nombreElemento.includes('button') ) { // hay que borrar el todo
 
-        todoList.eliminarTodo( todoId );
+        todoListPri.eliminarTodo( todoId );
         divTodoList[i].removeChild( todoElemento );
     }
 })};
 eventoMarcarCompletado(0);
+// eventoMarcarCompletado(1);
 
 
 // evento de eliminar completados
 const eventoBorrar = (j) => {
     btnBorrar[j].addEventListener('click', () => {
 
-    todoList.eliminarCompletados();
+    todoListPri.eliminarCompletados();
 
     for( let i = divTodoList[j].children.length-1; i >= 0; i-- ) {
 
@@ -103,6 +106,7 @@ const eventoBorrar = (j) => {
     }
 })};
 eventoBorrar(0);
+// eventoBorrar(1);
 
 
 // evento para filtrar la lista
@@ -137,3 +141,4 @@ const eventoFiltrar = (i) => {
     }
 })};
 eventoFiltrar(0);
+// eventoFiltrar(1);

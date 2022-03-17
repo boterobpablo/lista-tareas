@@ -7,12 +7,13 @@ import { Todo, TodoList } from './classes';
 import { crearTodoHtml } from './js/componentes';
 
 
-export const todoList = new TodoList();
+export const todoListPri = new TodoList();
 
 //. todoList.todos.forEach( todo => crearTodoHtml(todo) );
 // es lo mismo que hacer:
 // si solo se tiene un argumento y ese mismo se pasa como argumento
 // del callback, se puede acortar de la siguiente manera
-todoList.todos.forEach( todo => crearTodoHtml(todo, 0) );
+todoListPri.todos.forEach( todo => crearTodoHtml(todo, 0) );
+// todoListPri.todos.forEach( todo => crearTodoHtml(todo, 1) );
 
-console.log( 'todos', todoList.todos );
+console.log( 'todos', todoListPri.todos );
