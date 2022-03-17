@@ -7,7 +7,7 @@ import { Todo, TodoList } from './classes';
 import { crearTodoHtml } from './js/componentes';
 
 
-export const todoListPri = new TodoList();
+export const todoListPri = new TodoList(0);
 
 //. todoList.todos.forEach( todo => crearTodoHtml(todo) );
 // es lo mismo que hacer:
