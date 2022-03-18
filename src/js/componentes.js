@@ -9,7 +9,6 @@ const btnBorrar     = document.querySelectorAll('.clear-completed');
 const ulFiltros     = document.querySelectorAll('.filters');
 const anchorFiltros = document.querySelectorAll('.filtro');
 
-console.log(anchorFiltros);
 
 // crear la insercion de la tarea en el html
 export const crearTodoHtml = ( todo, indice ) => {
@@ -47,7 +46,6 @@ const eventoEnter = (i) => {
     // si se presiona la tecla enter
     if ( event.keyCode === 13 && txtInput[i].value.length > 0 ) {
 
-        console.log(txtInput[i].value);
         const nuevoTodo = new Todo( txtInput[i].value );
         
         i == 0 

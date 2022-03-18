@@ -17,4 +17,4 @@ export const todoListCom = new TodoList(1);
 todoListPri.todos.forEach( todo => crearTodoHtml(todo, 0) );
 todoListCom.todos1.forEach( todo => crearTodoHtml(todo, 1) );
 
-console.log( 'todos', todoListPri.todos );
+// console.log( 'todos', todoListPri.todos );
