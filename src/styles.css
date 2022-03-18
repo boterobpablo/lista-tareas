@@ -376,10 +376,11 @@ html .clear-completed:active {
 	}
 }
 
-@media (max-width: 479px) {
+@media (max-width: 480px) {
 	.footer {
-		height: 50px;
+		height: 60px;
 		flex-direction: column;
+		justify-content: center;
 		/* align-items: ; */
 	}
 
