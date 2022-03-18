@@ -141,7 +141,7 @@ const eventoFiltrar = (i) => {
                 }
             break;
 
-            case 'Completados':
+            case 'Completadas':
                 if( !completado ) {
                     elemento.classList.add('hidden');
                 }
